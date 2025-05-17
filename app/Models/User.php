@@ -45,4 +45,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->user_group === 'a';
+    }
+
+    public function isStaff()
+    {
+        return $this->user_group === 's';
+    }
+
+    public function isUser()
+    {
+        return $this->user_group === 'u';
+    }
 }

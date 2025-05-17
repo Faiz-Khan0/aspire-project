@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\EnsureUserGroup;
 use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,13 @@ Route::post('/checkin', [CheckinController::class, 'store'])->name('checkin.stor
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware([
+    'auth',
+    new EnsureUserGroup('a', 's'), // allow admin and staff
+])->group(function () {
+    Route::get('/dashboard', fn () => 'Dashboard for admins and staff');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
