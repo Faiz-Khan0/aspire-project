@@ -10,7 +10,7 @@ class Service extends Model
 
     protected $table = 'services';
 
-    public mixed $name;
+    protected mixed $name;
 
     protected $fillable = ['name'];
     public function subservices()

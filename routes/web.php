@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Service;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,9 @@ Route::get('/', function () {
     $services = Service::with('subservices')->get();
     return view('welcome', compact('services'));
 });
+
+// store checkin 
+Route::post('/checkin', [CheckinController::class, 'store'])->name('checkin.store');
 
 
 Route::get('/dashboard', function () {

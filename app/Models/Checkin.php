@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checkin extends Model
 {
+    protected $table = 'check_in';
 
-    protected $fillable = ['user_id', 'subservice_id', 'service_id', 'checkin_time'];
+
+    protected $fillable = ['user_id', 'subservice_id', 'service_id'];
 
     public function user()
     {

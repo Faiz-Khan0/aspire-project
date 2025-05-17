@@ -1,56 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-        <!-- Styles / Scripts -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @else
-
-        @endif
-    </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-            @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                    @auth
-                        <a
-                            href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                        >
-                            Dashboard
-                        </a>
-                    @else
-                        <a
-                            href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
-                        >
-                            Log in
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a
-                                href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-<!DOCTYPE html>
-<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    <!-- Styles / Scripts -->
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+    @endif
     <meta charset="UTF-8">
     <title>Service Check-In</title>
 
@@ -60,7 +25,8 @@
     {{-- Tablet-friendly styling --}}
     <style>
         body {
-            font-size: 1.4rem; /* Larger base font for readability */
+            font-size: 1.4rem;
+            /* Larger base font for readability */
             padding: 0;
             margin: 0;
             background-color: #f9f9f9;
@@ -86,7 +52,8 @@
             font-weight: 600;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             font-size: 1.4rem;
             padding: 1rem;
         }
@@ -101,9 +68,41 @@
         }
     </style>
 </head>
+
 <body>
 
+    <nav class="navbar navbar-expand-lg navbar-dark py-3 mb-4 shadow-sm" style="background: #e3f2fd;">
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
 
+            {{-- Aspire Logo --}}
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="{{ asset('alogo.png') }}" alt="Aspire Logo" style="height: 100px" class="me-3">
+                <span class="fs-3 fw-bold text-dark">Aspire Check-In</span>
+            </a>
+
+            {{-- Auth Area: Login or Logout --}}
+            @if (Route::has('login'))
+                <nav class="flex items-center justify-end gap-4">
+                    @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="inline-block px-5 py-1.5 btn btn-primary rounded-sm text-sm leading-normal">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="inline-block btn btn-success px-5 py-1.5 rounded-sm text-sm leading-normal">
+                            Log in
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="inline-block px-5 py-1.5 btn btn-primary rounded-sm text-sm leading-normal">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
+        </div>
+    </nav>
 
     <main>
         {{-- Validation Errors --}}
@@ -124,14 +123,8 @@
             {{-- PIN --}}
             <div class="mb-4">
                 <label for="pin" class="form-label">Enter Your 4-Digit PIN</label>
-                <input type="text"
-                       class="form-control"
-                       id="pin"
-                       name="pin"
-                       maxlength="4"
-                       minlength="4"
-                       pattern="\d{4}"
-                       required>
+                <input type="text" class="form-control" id="pin" name="pin" maxlength="4" minlength="4" pattern="\d{4}" placeholder="Your pin"
+                    required>
             </div>
 
             {{-- Main Service Dropdown --}}
@@ -197,7 +190,8 @@
 
     {{-- Success Modal --}}
     @if(session('checked_in'))
-        <div class="modal fade show" id="successModal" tabindex="-1" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal fade show" id="successModal" tabindex="-1" style="display: block;" aria-modal="true"
+            role="dialog">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content text-center">
                     <div class="modal-header">
@@ -245,12 +239,14 @@
     </script>
 
 </body>
+
 </html>
 
-        </div>
+</div>
 
-        @if (Route::has('login'))
-            <div class="h-14.5 hidden lg:block"></div>
-        @endif
-    </body>
+@if (Route::has('login'))
+    <div class="h-14.5 hidden lg:block"></div>
+@endif
+</body>
+
 </html>
