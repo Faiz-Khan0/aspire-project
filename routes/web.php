@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $services = Service::with('subservices')->get();
+    return view('welcome', compact('services'));
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
