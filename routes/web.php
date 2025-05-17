@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\EnsureUserGroup;
+use App\Http\Controllers\UserController;
+
 use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,16 @@ Route::get('/dashboard', function () {
     'verified',
     'user_group:a,s', // Only allow Admin (a) or Staff (s)
 ])->name('dashboard');
+
+Route::get('/createUser', function () {
+    return view('usermanagement');
+})->middleware([
+    'auth', // check if user logged in 
+    'verified',
+    'user_group:a,s', // Only allow Admin (a) or Staff (s)
+])->name('userManagement');
+
+Route::get('/users/create', [UserController::class, 'create'])->middleware(['auth'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->middleware(['auth'])->name('users.store');
 
 require __DIR__ . '/auth.php';
