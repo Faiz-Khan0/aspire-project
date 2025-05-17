@@ -89,12 +89,14 @@
                             Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="inline-block btn btn-success px-5 py-1.5 rounded-sm text-sm leading-normal">
+                        <a href="{{ route('login') }}"
+                            class="inline-block btn btn-success px-5 py-1.5 rounded-sm text-sm leading-normal">
                             Log in
                         </a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="inline-block px-5 py-1.5 btn btn-primary rounded-sm text-sm leading-normal">
+                            <a href="{{ route('register') }}"
+                                class="inline-block px-5 py-1.5 btn btn-primary rounded-sm text-sm leading-normal">
                                 Register
                             </a>
                         @endif
@@ -123,8 +125,8 @@
             {{-- PIN --}}
             <div class="mb-4">
                 <label for="pin" class="form-label">Enter Your 4-Digit PIN</label>
-                <input type="text" class="form-control" id="pin" name="pin" maxlength="4" minlength="4" pattern="\d{4}" placeholder="Your pin"
-                    required>
+                <input type="text" class="form-control" id="pin" name="pin" maxlength="4" minlength="4" pattern="\d{4}"
+                    placeholder="Your pin" required>
             </div>
 
             {{-- Main Service Dropdown --}}
@@ -179,9 +181,16 @@
                             <p>Are you <strong>{{ session('confirm_name') }}</strong>?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Yes, Confirm</button>
+                            <button type="button" class="btn btn-success" onclick="closeModal()">Yes, Confirm</button>
                             <a href="/" class="btn btn-danger">Cancel</a>
                         </div>
+                        <script>
+                            function closeModal() {
+                                const modal = document.getElementById('confirmModal');
+                                modal.style.display = 'none';
+                                modal.classList.remove('show');
+                            }
+                        </script>
                     </form>
                 </div>
             </div>
