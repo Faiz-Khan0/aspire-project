@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CheckinController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -22,9 +23,8 @@ Route::middleware(['auth', 'user_group:a,s'])->group(function () {
 Route::post('/checkin', [CheckinController::class, 'store'])->name('checkin.store');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware([
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware([
     'auth', // check if user logged in 
     'verified',
     'user_group:a,s', // Only allow Admin (a) or Staff (s)
