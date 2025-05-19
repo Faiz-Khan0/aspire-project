@@ -19,7 +19,7 @@
                         User Management
                     </x-nav-link>
                     <x-nav-link :href="route('subservices.create')" :active="request()->routeIs('subservices.create')">
-                        Create Sub-Service
+                        Create New Service
                     </x-nav-link>
                 </div>
             </div>
