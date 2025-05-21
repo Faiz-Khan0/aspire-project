@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Models\Subservice;
+use App\Models\SubService;
 use Illuminate\Http\Request;
 
 class SubserviceController extends Controller
@@ -20,7 +20,7 @@ class SubserviceController extends Controller
             'service_id' => 'required|exists:services,id',
         ]);
 
-        Subservice::create($validated);
+        SubService::create($validated);
 
         return redirect()->route('subservices.create')->with('success', 'Subservice created successfully.');
     }
