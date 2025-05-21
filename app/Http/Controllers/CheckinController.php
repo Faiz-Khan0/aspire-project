@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Checkin;
+use App\Models\CheckIn;
 use App\Models\SubService;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,7 +48,7 @@ public function store(Request $request)
     unset($validated['pin']);
 
     // Create the check-in
-    Checkin::create($validated);
+    CheckIn::create($validated);
 
     $subservice = SubService::with('service')->findOrFail($request->subservice_id);
 
