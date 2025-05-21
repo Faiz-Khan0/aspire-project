@@ -39,7 +39,6 @@
                focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600
                rounded-md shadow-sm">
                                 <option value="u">User</option>
-                                <option value="s">Staff</option>
                                 <option value="a">Admin</option>
                             </select>
 

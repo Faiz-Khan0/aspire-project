@@ -93,13 +93,6 @@
                             class="inline-block btn btn-success px-5 py-1.5 rounded-sm text-sm leading-normal">
                             Log in
                         </a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 btn btn-primary rounded-sm text-sm leading-normal">
-                                Register
-                            </a>
-                        @endif
                     @endauth
                 </nav>
             @endif
